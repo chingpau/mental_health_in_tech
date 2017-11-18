@@ -6,7 +6,7 @@ function(input, output, session) {
   abc <- reactive({
     
     setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")
-    db <- dbConnect(SQLite(), dbname="mental_health.sqlite")
+    db <- dbConnect(SQLite(), dbname="mental_health14.sqlite")
     mental_health <- dbReadTable(db,"mental_health")
     dbDisconnect(db)
     
@@ -159,7 +159,7 @@ function(input, output, session) {
             "<li>obs_consequence: Have you heard of or observed negative consequences for coworkers with mental health conditions in your workplace?</li>",
             "</ul></h5>")
     })
-  
+
     output$values <- renderTable({
       temp <- as.data.frame(abc())
       head(temp,16)
