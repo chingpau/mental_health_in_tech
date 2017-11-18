@@ -132,7 +132,9 @@ fluidPage(
       
       tabsetPanel(
         tabPanel("Plot", plotlyOutput(outputId = "proba"), "Table", tableOutput('values')),
-        tabPanel("Summary", htmlOutput('text'))
+        tabPanel("Summary", htmlOutput('text')),
+        tabPanel("ui.r", htmlOutput('ui')),
+        tabPanel("server.r", htmlOutput('server'))
       )
       # Output: piechart ----
       # plotlyOutput(outputId = "proba"),

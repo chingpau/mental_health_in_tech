@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<code>library(RSQLite)</code><br>
+<code>library(dplyr)</code><br>
+<code></code><br>
+<code>function(input, output, session) {</code><br>
+<code>  </code><br>
+<code>  abc <- reactive({</code><br>
+<code>    </code><br>
+<code>    setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")</code><br>
+<code>    db <- dbConnect(SQLite(), dbname="mental_health14.sqlite")</code><br>
+<code>    mental_health <- dbReadTable(db,"mental_health")</code><br>
+<code>    dbDisconnect(db)</code><br>
+<code>    </code><br>
+<code>    minAge <- input$age[1]</code><br>
+<code>    maxAge <- input$age[2]</code><br>
+<code>    gender <- input$gender</code><br>
+<code>    Self_employed <- input$Self_employed</code><br>
+<code>    Family_history <- input$Family_history</code><br>
+<code>    Work_interfere <- input$Work_interfere</code><br>
+<code>    No_employees <- input$No_employees</code><br>
+<code>    Remote_work <- input$Remote_work</code><br>
+<code>    Tech_company <- input$Tech_company</code><br>
+<code>    Benefits <- input$Benefits #care_options, wellness_program, seek help,anonymity</code><br>
+<code>    Leave <- input$Leave</code><br>
+<code>    Mental_phys_health_consequence <- input$Mental_phys_health_consequence #phys_health_consequence, mental_health_consequence</code><br>
+<code>    Coworker <- input$Coworker #supervisor</code><br>
+<code>    Mental_phys_interview <- input$Mental_phys_interview #mental_health_interview, phys_health_interview</code><br>
+<code>    Mental_vs_physical <- input$Mental_vs_physical</code><br>
+<code>  </code><br>
+<code>    df <- mental_health %>% filter(</code><br>
+<code>      Age >= minAge,</code><br>
+<code>      Age <= maxAge</code><br>
+<code>    )</code><br>
+<code>    #optional</code><br>
+<code>    if(gender != "All"){</code><br>
+<code>      df <- df %>% filter(Gender == tolower(gender))</code><br>
+<code>    }</code><br>
+<code>    if(Self_employed != "All"){</code><br>
+<code>      df <- df %>% filter(self_employed == Self_employed)</code><br>
+<code>    }</code><br>
+<code>    if(Family_history != "All"){</code><br>
+<code>      df <- df %>% filter(family_history == Family_history)</code><br>
+<code>    }</code><br>
+<code>    if(Work_interfere != "All"){</code><br>
+<code>      df <- df %>% filter(work_interfere == Work_interfere)</code><br>
+<code>    }</code><br>
+<code>    if(No_employees != "All"){</code><br>
+<code>      df <- df %>% filter(no_employees == No_employees)</code><br>
+<code>    }</code><br>
+<code>    if(Remote_work != "All"){</code><br>
+<code>      df <- df %>% filter(remote_work == Remote_work)</code><br>
+<code>    }</code><br>
+<code>    if(Tech_company != "All"){</code><br>
+<code>      df <- df %>% filter(tech_company == Tech_company)</code><br>
+<code>    }</code><br>
+<code>    if(Leave != "All"){</code><br>
+<code>      df <- df %>% filter(leave == Leave)</code><br>
+<code>    }</code><br>
+<code>    if(Coworker != "All"){</code><br>
+<code>      df <- df %>% filter(coworkers == Coworker,</code><br>
+<code>                          supervisor == Coworker)</code><br>
+<code>    }</code><br>
+<code>    if(Benefits != "All"){</code><br>
+<code>      if(Benefits != "Don't know")</code><br>
+<code>      {</code><br>
+<code>        df <- df %>% filter(</code><br>
+<code>          benefits == Benefits,</code><br>
+<code>          care_options == Benefits,</code><br>
+<code>          wellness_program == Benefits,</code><br>
+<code>          seek_help == Benefits,</code><br>
+<code>          anonymity == Benefits</code><br>
+<code>        )</code><br>
+<code>      }else{</code><br>
+<code>        df <- df %>% filter(</code><br>
+<code>          benefits == Benefits,</code><br>
+<code>          care_options == "Not sure",</code><br>
+<code>          wellness_program == Benefits,</code><br>
+<code>          seek_help == Benefits,</code><br>
+<code>          anonymity == Benefits</code><br>
+<code>        )</code><br>
+<code>      }</code><br>
+<code>    }</code><br>
+<code>    if(Mental_phys_health_consequence != "All")</code><br>
+<code>    {</code><br>
+<code>      df <- df %>% filter(</code><br>
+<code>        mental_health_consequence == Mental_phys_health_consequence,</code><br>
+<code>        phys_health_consequence == Mental_phys_health_consequence</code><br>
+<code>      )</code><br>
+<code>    }</code><br>
+<code>    if(Mental_phys_interview != "All")</code><br>
+<code>    {</code><br>
+<code>      df <- df %>% filter(</code><br>
+<code>        mental_health_interview == Mental_phys_interview,</code><br>
+<code>        phys_health_interview == Mental_phys_interview</code><br>
+<code>      )</code><br>
+<code>    }</code><br>
+<code>    if(Mental_vs_physical != "All")</code><br>
+<code>    {</code><br>
+<code>      df <- df %>% filter(mental_vs_physical == Mental_vs_physical)</code><br>
+<code>    }</code><br>
+<code>    </code><br>
+<code>    df <- as.data.frame(df)</code><br>
+<code>  })</code><br>
+<code>  </code><br>
+<code>  output$proba <- renderPlotly({</code><br>
+<code>  </code><br>
+<code>    ## Pie Chart with Percentages</code><br>
+<code>    # mental_filtered <- as.data.frame(abc())</code><br>
+<code>    # count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())</code><br>
+<code>    # count <- as.data.frame(count)</code><br>
+<code>    # slices <- count[,2]</code><br>
+<code>    # lbls <- unique(mental_health$treatment)</code><br>
+<code>    # pct <- round(slices/sum(slices)*100.00, 2)</code><br>
+<code>    # lbls <- paste(lbls, pct) # add percents to labels </code><br>
+<code>    # lbls <- paste(lbls,"%",sep="") # ad % to labels </code><br>
+<code>    # pie(slices,labels = lbls, col=rainbow(length(lbls)),</code><br>
+<code>    # main="Pie Chart of soughting treatment for a mental health condition")</code><br>
+<code>    mental_filtered <- as.data.frame(abc())</code><br>
+<code>    count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())</code><br>
+<code>    </code><br>
+<code>    plot_ly(count, labels = ~treatment, values = ~n, type = 'pie', textposition = 'inside',</code><br>
+<code>            textinfo = 'label+percent', insidetextfont = list(color = '#FFFFFF'),</code><br>
+<code>            hoverinfo = 'text', text = ~paste('Count = ', n, ' votes') )%>% </code><br>
+<code>      layout(title = 'Probability of soughting for treatment given a mental health condition',</code><br>
+<code>             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),</code><br>
+<code>             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))</code><br>
+<code>  })</code><br>
+<code>  </code><br>
+<code>    # output$text <- renderPrint({</code><br>
+<code>    #   mental_filtered <- as.data.frame(abc())</code><br>
+<code>    #   count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())</code><br>
+<code>    #   count})</code><br>
+<code>  </code><br>
+<code>    output$text <- renderText({</code><br>
+<code>      includeHTML("./www/summary.html")</code><br>
+<code>    })</code><br>
+<code></code><br>
+<code>    output$ui <- renderText({</code><br>
+<code>      includeHTML("./www/ui_script.html")</code><br>
+<code>    })</code><br>
+<code>    </code><br>
+<code>    output$server <- renderText({</code><br>
+<code>      includeHTML("./www/server_script.html")</code><br>
+<code>    })</code><br>
+<code>    </code><br>
+<code>    output$values <- renderTable({</code><br>
+<code>      temp <- as.data.frame(abc())</code><br>
+<code>      head(temp,16)</code><br>
+<code>    })</code><br>
+<code>}</code><br>
+<code></code><br>
+
+</body>
+</html>

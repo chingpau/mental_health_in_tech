@@ -131,35 +131,17 @@ function(input, output, session) {
     #   count})
   
     output$text <- renderText({
-      paste("<h3><b>Dataset Information<br><h3>", "</b>", "<h5>This dataset is from a 2014 survey that measures attitudes towards mental health and frequency of mental health disorders in the tech workplace. <h5>", "<br>",  "<br>", 
-            "<h4><b>Content<br><h4>", "</b>",
-            "<h5><ul>", 
-            "<li>Age</li>",
-            "<li>Gender</li>",
-            "<li>self_employed: Are you self-employed?</li>",
-            "<li>family_history: Do you have a family history of mental illness?</li>",
-            "<li>treatment: Have you sought treatment for a mental health condition?</li>",
-            "<li>work_interfere: If you have a mental health condition, do you feel that it interferes with your work?</li>",
-            "<li>no_employees: How many employees does your company or organization have?</li>",
-            "<li>remote_work: Do you work remotely (outside of an office) at least 50% of the time?</li>",
-            "<li>tech_company: Is your employer primarily a tech company/organization?</li>",
-            "<li>benefits: Does your employer provide mental health benefits?</li>",
-            "<li>care_options: Do you know the options for mental health care your employer provides?</li>",
-            "<li>wellness_program: Has your employer ever discussed mental health as part of an employee wellness program?</li>",
-            "<li>seek_help: Does your employer provide resources to learn more about mental health issues and how to seek help?</li>",
-            "<li>anonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources?</li>",
-            "<li>leave: How easy is it for you to take medical leave for a mental health condition?</li>",
-            "<li>mental_health_consequence: Do you think that discussing a mental health issue with your employer would have negative consequences?</li>",
-            "<li>phys_health_consequence: Do you think that discussing a physical health issue with your employer would have negative consequences?</li>",
-            "<li>coworkers: Would you be willing to discuss a mental health issue with your coworkers?</li>",
-            "<li>supervisor: Would you be willing to discuss a mental health issue with your direct supervisor(s)?</li>",
-            "<li>mental_health_interview: Would you bring up a mental health issue with a potential employer in an interview?</li>",
-            "<li>phys_health_interview: Would you bring up a physical health issue with a potential employer in an interview?</li>",
-            "<li>mental_vs_physical: Do you feel that your employer takes mental health as seriously as physical health?</li>",
-            "<li>obs_consequence: Have you heard of or observed negative consequences for coworkers with mental health conditions in your workplace?</li>",
-            "</ul></h5>")
+      includeHTML("./www/summary.html")
     })
 
+    output$ui <- renderText({
+      includeHTML("./www/ui_script.html")
+    })
+    
+    output$server <- renderText({
+      includeHTML("./www/server_script.html")
+    })
+    
     output$values <- renderTable({
       temp <- as.data.frame(abc())
       head(temp,16)
