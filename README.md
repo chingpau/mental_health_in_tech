@@ -1,5 +1,5 @@
 # Mental Health in Tech Place
-## Visualization @ SHINY ~ Rstudio
+### Visualization @ SHINY ~ Rstudio
 
-#####The dataset is a combine of **2014 and 2016 mental health survey in Techplace dataset**.
-#####You can download the original data from [kaggle](https://www.kaggle.com/osmi/mental-health-in-tech-survey "Kaggle Dataset") 
+The dataset is a combine of **2014 and 2016 mental health survey in Techplace dataset**.
+You can download the original data from [kaggle](https://www.kaggle.com/osmi/mental-health-in-tech-survey "Kaggle Dataset") 
