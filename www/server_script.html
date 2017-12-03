@@ -10,7 +10,7 @@
 <code>  abc <- reactive({</code><br>
 <code>    </code><br>
 <code>    setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")</code><br>
-<code>    db <- dbConnect(SQLite(), dbname="mental_health14.sqlite")</code><br>
+<code>    db <- dbConnect(SQLite(), dbname="mental_health_db.sqlite")</code><br>
 <code>    mental_health <- dbReadTable(db,"mental_health")</code><br>
 <code>    dbDisconnect(db)</code><br>
 <code>    </code><br>

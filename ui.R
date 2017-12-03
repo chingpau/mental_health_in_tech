@@ -15,7 +15,7 @@ fluidPage(
       # Input: Slider for the number of bins ----
       sliderInput(inputId = "age",
                   label = "Age:",
-                  min = 18,
+                  min = 15,
                   max = 65,
                   value = c(20, 30)),
       

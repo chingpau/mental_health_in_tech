@@ -6,7 +6,7 @@ function(input, output, session) {
   abc <- reactive({
     
     #setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")
-    db <- dbConnect(SQLite(), dbname="mental_health14.sqlite")
+    db <- dbConnect(SQLite(), dbname="mental_health_db.sqlite")
     mental_health <- dbReadTable(db,"mental_health")
     dbDisconnect(db)
     
@@ -115,6 +115,7 @@ function(input, output, session) {
     # pie(slices,labels = lbls, col=rainbow(length(lbls)),
     # main="Pie Chart of soughting treatment for a mental health condition")
     mental_filtered <- as.data.frame(abc())
+    
     count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())
     
     plot_ly(count, labels = ~treatment, values = ~n, type = 'pie', textposition = 'inside',
