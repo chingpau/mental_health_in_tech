@@ -10,6 +10,7 @@ function(input, output, session) {
     mental_health <- dbReadTable(db,"mental_health")
     dbDisconnect(db)
     
+	#read all input from user
     minAge <- input$age[1]
     maxAge <- input$age[2]
     gender <- input$gender
@@ -26,6 +27,7 @@ function(input, output, session) {
     Mental_phys_interview <- input$Mental_phys_interview #mental_health_interview, phys_health_interview
     Mental_vs_physical <- input$Mental_vs_physical
   
+	#filtering based on the user input
     df <- mental_health %>% filter(
       Age >= minAge,
       Age <= maxAge
@@ -114,8 +116,11 @@ function(input, output, session) {
     # lbls <- paste(lbls,"%",sep="") # ad % to labels 
     # pie(slices,labels = lbls, col=rainbow(length(lbls)),
     # main="Pie Chart of soughting treatment for a mental health condition")
-    mental_filtered <- as.data.frame(abc())
     
+	#convert the type of abc as dataframe
+	mental_filtered <- as.data.frame(abc())
+    
+	#get the count of going to treatment and not going to treatment
     count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())
     
     plot_ly(count, labels = ~treatment, values = ~n, type = 'pie', textposition = 'inside',

@@ -9,11 +9,12 @@
 <code>  </code><br>
 <code>  abc <- reactive({</code><br>
 <code>    </code><br>
-<code>    setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")</code><br>
+<code>    #setwd("C:/Users/ChingPau/Desktop/mental_health_in_tech/")</code><br>
 <code>    db <- dbConnect(SQLite(), dbname="mental_health_db.sqlite")</code><br>
 <code>    mental_health <- dbReadTable(db,"mental_health")</code><br>
 <code>    dbDisconnect(db)</code><br>
 <code>    </code><br>
+<code>	#read all input from user</code><br>
 <code>    minAge <- input$age[1]</code><br>
 <code>    maxAge <- input$age[2]</code><br>
 <code>    gender <- input$gender</code><br>
@@ -30,6 +31,7 @@
 <code>    Mental_phys_interview <- input$Mental_phys_interview #mental_health_interview, phys_health_interview</code><br>
 <code>    Mental_vs_physical <- input$Mental_vs_physical</code><br>
 <code>  </code><br>
+<code>	#filtering based on the user input</code><br>
 <code>    df <- mental_health %>% filter(</code><br>
 <code>      Age >= minAge,</code><br>
 <code>      Age <= maxAge</code><br>
@@ -118,7 +120,11 @@
 <code>    # lbls <- paste(lbls,"%",sep="") # ad % to labels </code><br>
 <code>    # pie(slices,labels = lbls, col=rainbow(length(lbls)),</code><br>
 <code>    # main="Pie Chart of soughting treatment for a mental health condition")</code><br>
-<code>    mental_filtered <- as.data.frame(abc())</code><br>
+<code>    </code><br>
+<code>	#convert the type of abc as dataframe</code><br>
+<code>	mental_filtered <- as.data.frame(abc())</code><br>
+<code>    </code><br>
+<code>	#get the count of going to treatment and not going to treatment</code><br>
 <code>    count <- mental_filtered %>% group_by(treatment) %>% summarise(n = n())</code><br>
 <code>    </code><br>
 <code>    plot_ly(count, labels = ~treatment, values = ~n, type = 'pie', textposition = 'inside',</code><br>

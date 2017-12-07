@@ -16,13 +16,13 @@
 <code>    # Sidebar panel for inputs ----</code><br>
 <code>    sidebarPanel(</code><br>
 <code>      </code><br>
-<code>      # Input: Slider for the number of bins ----</code><br>
+<code>      # Input: Slider for the age ----</code><br>
 <code>      sliderInput(inputId = "age",</code><br>
 <code>                  label = "Age:",</code><br>
 <code>                  min = 15,</code><br>
 <code>                  max = 65,</code><br>
 <code>                  value = c(20, 30)),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for gender ----</code><br>
 <code>      selectInput(inputId = "gender", </code><br>
 <code>                  label = "Gender",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -30,21 +30,21 @@
 <code>                              "Female", </code><br>
 <code>                              "Trans"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for self-employed----</code><br>
 <code>      selectInput(inputId = "Self_employed", </code><br>
 <code>                  label = "Self-employed?",</code><br>
 <code>                  choices = c("All", </code><br>
 <code>                              "Yes",</code><br>
 <code>                              "No"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      ## Input: dropdown for family history ----</code><br>
 <code>      selectInput(inputId = "Family_history", </code><br>
 <code>                  label = "Family History of Mental Illness?",</code><br>
 <code>                  choices = c("All", </code><br>
 <code>                              "Yes",</code><br>
 <code>                              "No"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for work interfere ----</code><br>
 <code>      selectInput(inputId = "Work_interfere", </code><br>
 <code>                  label = "Mental illness will affect the work?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -53,7 +53,7 @@
 <code>                              "Sometimes",</code><br>
 <code>                              "Often"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      #drop down for no_employee</code><br>
 <code>      selectInput(inputId = "No_employees", </code><br>
 <code>                  label = "Number of Employees in company?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -64,21 +64,21 @@
 <code>                              "500-1000",</code><br>
 <code>                              "More than 1000"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for remote work ----</code><br>
 <code>      selectInput(inputId = "Remote_work", </code><br>
 <code>                  label = "Do you work remotely for more than 50% of working time?",</code><br>
 <code>                  choices = c("All", </code><br>
 <code>                              "Yes",</code><br>
 <code>                              "No"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for tech_company ----</code><br>
 <code>      selectInput(inputId = "Tech_company", </code><br>
 <code>                  label = "Tech company?",</code><br>
 <code>                  choices = c("All", </code><br>
 <code>                              "Yes",</code><br>
 <code>                              "No"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for benefits ----</code><br>
 <code>      selectInput(inputId = "Benefits", </code><br>
 <code>                  label = "Does your employer provide mental Health Care and Benefits?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -86,7 +86,7 @@
 <code>                              "No",</code><br>
 <code>                              "Don't know"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for leave ----</code><br>
 <code>      selectInput(inputId = "Leave", </code><br>
 <code>                  label = "Would it be difficult to take leave for mental health condition?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -96,7 +96,7 @@
 <code>                              "Very easy",</code><br>
 <code>                              "Don't know"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for mental phys health consequence ----</code><br>
 <code>      selectInput(inputId = "Mental_phys_health_consequence", </code><br>
 <code>                  label = "Would it have negative consequences if discuss mental/physical health issue with employer?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -104,7 +104,7 @@
 <code>                              "No",</code><br>
 <code>                              "Maybe"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for coworker ----</code><br>
 <code>      selectInput(inputId = "Coworker", </code><br>
 <code>                  label = "Would you discuss a mental health issue with coworkers/supervisor?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -112,7 +112,7 @@
 <code>                              "No",</code><br>
 <code>                              "Some of them"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for mental_phys_interview ----</code><br>
 <code>      selectInput(inputId = "Mental_phys_interview", </code><br>
 <code>                  label = "Would you bring up mental or physical health issue during interview?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -120,7 +120,7 @@
 <code>                              "No",</code><br>
 <code>                              "Maybe"),</code><br>
 <code>                  selected = "All"),</code><br>
-<code>      </code><br>
+<code>      # Input: dropdown for mental vs physical ----</code><br>
 <code>      selectInput(inputId = "Mental_vs_physical", </code><br>
 <code>                  label = "Will your employer takes mental health as serious as physical health?",</code><br>
 <code>                  choices = c("All", </code><br>
@@ -136,9 +136,9 @@
 <code>      </code><br>
 <code>      tabsetPanel(</code><br>
 <code>        tabPanel("Plot", plotlyOutput(outputId = "proba"), "Table", tableOutput('values')),</code><br>
-<code>        tabPanel("Summary", htmlOutput('text')),</code><br>
-<code>        tabPanel("ui.r", htmlOutput('ui')),</code><br>
-<code>        tabPanel("server.r", htmlOutput('server'))</code><br>
+<code>        tabPanel("Summary", htmlOutput('text')), #show the summary of the assignment</code><br>
+<code>        tabPanel("ui.r", htmlOutput('ui')), #show the code for ui.R</code><br>
+<code>        tabPanel("server.r", htmlOutput('server')) #show the code for server.R</code><br>
 <code>      )</code><br>
 <code>      # Output: piechart ----</code><br>
 <code>      # plotlyOutput(outputId = "proba"),</code><br>
@@ -147,6 +147,5 @@
 <code>    )</code><br>
 <code>  )</code><br>
 <code>)</code><br>
-
 </body>
 </html>
